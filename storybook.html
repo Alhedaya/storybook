@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Storybook</title>
+  <style> 
+/* style.css */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.storybook {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  border: 2px solid #333;
+  overflow: hidden;
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #333;
+  font-size: 1.5rem;
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.page.active {
+  opacity: 1;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+  <div class="storybook">
+    <div class="page" id="page1">Once upon a time...</div>
+    <div class="page" id="page2">In a faraway land...</div>
+    <div class="page" id="page3">Lived a brave hero...</div>
+  </div>
+  <div class="buttons">
+    <button onclick="previousPage()">Previous</button>
+    <button onclick="nextPage()">Next</button>
+  </div>
+  <script>
+// script.js
+let currentPage = 1;
+const totalPages = 3;
+
+function showPage(pageNumber) {
+  for (let i = 1; i <= totalPages; i++) {
+    const page = document.getElementById(`page${i}`);
+    page.classList.toggle('active', i === pageNumber);
+  }
+}
+
+function nextPage() {
+  if (currentPage < totalPages) {
+    currentPage++;
+    showPage(currentPage);
+  }
+}
+
+function previousPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    showPage(currentPage);
+  }
+}
+
+// Initialize first page
+showPage(currentPage);
+
+</script>
+</body>
+</html>
